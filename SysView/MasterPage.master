@@ -1,0 +1,218 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>Dashboard</title>    
+        <!-- Bootstrap-->
+        <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+        <!--Common Plugins CSS -->
+        <link href="css/plugins/plugins.css" rel="stylesheet"/>
+        <!--fonts-->
+        <link href="lib/line-icons/line-icons.css" rel="stylesheet"/>
+        <link href="lib/toastr/toastr.min.css" rel="stylesheet"/>
+        <link href="lib/font-awesome/css/fontawesome-all.min.css" rel="stylesheet"/>
+        <link href="lib/data-tables/dataTables.bootstrap4.min.css" rel="stylesheet"/>
+
+        <link href="css/style.css" rel="stylesheet"/>
+        <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/plugins/plugins.js"></script> 
+        <script type="text/javascript" src="js/appUi-custom.js"></script> 
+        <script type="text/javascript" src="lib/peity/jquery.peity.min.js"></script>
+        <script src="lib/select2/dist/js/select2.min.js"></script>
+        <script src="lib/toastr/toastr.min.js"></script>
+        <style>
+            #loader-wrapper {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1000;
+                background: rgba(0, 0, 0, 0.7);
+                display: none; 
+            }
+            .lds-ripple {
+              display: inline-block;
+              position: absolute;
+              width: 80px;
+              height: 80px;
+              top: calc(50% - 40px);
+              left: calc(50% - 40px);
+            }
+            .lds-ripple div {
+              position: absolute;
+              border: 4px solid #fff;
+              opacity: 1;
+              border-radius: 50%;
+              animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+            }
+            .lds-ripple div:nth-child(2) {
+              animation-delay: -0.5s;
+            }
+            @keyframes lds-ripple {
+              0% {
+                top: 36px;
+                left: 36px;
+                width: 0;
+                height: 0;
+                opacity: 1;
+              }
+              100% {
+                top: 0px;
+                left: 0px;
+                width: 72px;
+                height: 72px;
+                opacity: 0;
+              }
+            }
+
+            .fa-user {
+                font-size: 29px;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div id="loader-wrapper">
+            <div class="lds-ripple"><div></div><div></div></div>
+        </div>
+        <div class="page-wrapper" id="page-wrapper">
+            <aside id="page-aside" class=" page-aside aside-fixed">
+                <div class="sidenav darkNav">
+                    <a href="home.aspx" class="app-logo d-flex flex flex-row align-items-center overflow-hidden justify-content-center">
+                        <img style="width: auto; height: 35px;" src="images/SysViewCloud_final.png" />
+                    </a>
+                    <div class="flex">
+                        <div class="aside-content slim-scroll">
+                            <ul class="metisMenu" id="metisMenu">
+                                <li class="nav-title">Menu<span class="nav-thumbnail"></span></li>
+                                <li class="dash"> <i class="fas fa-laptop nav-thumbnail"></i>
+                                <%--<li class="dash"> <i class="icon-Gaugage nav-thumbnail"></i>--%>
+                                    <a href="home.aspx">
+                                        <span class="nav-text">
+                                            Devices 
+                                        </span>
+                                    </a>
+                                </li><!--Menu-item-->
+                                <%--<li class="devices"><i class="icon-Magic-Wand nav-thumbnail"></i>--%>
+                                <li class="devices"><i class="fa fa-wrench nav-thumbnail"></i>
+                                    <a href="devices.aspx">
+                                        <span class="nav-text">
+                                            Repair
+                                        </span>
+                                    </a>
+                                </li><!--Menu-item-->
+                                <li class="student"><i class="fa fa-graduation-cap nav-thumbnail"></i>
+                                    <a href="admin-student.aspx">
+                                        <span class="nav-text">
+                                            Students
+                                        </span>
+                                    </a>
+                                </li><!--Menu-item-->
+                                <% if (Role == "Admin") { %>
+                                <li class="user"><i class="fa fa-users nav-thumbnail"></i>
+                                    <a href="admin-users.aspx">
+                                        <span class="nav-text">
+                                            Users
+                                        </span>
+                                    </a>
+                                </li>
+                                <% } %>
+
+                                <!--Menu-item-->
+<%--                                <li class="lunch"><i class="fa fa-utensils nav-thumbnail"></i>
+                                    <a href="lunch.aspx">
+                                        <span class="nav-text">
+                                            Meals
+                                        </span>
+                                    </a>--%>
+                                </li><!--Menu-item-->
+                            </ul>
+                        </div><!-- aside content end-->
+                    </div><!-- aside hidden scroll end-->
+                    <div class="aside-footer p-3 pl-25">
+                        <div class="">
+                            Cloud Connection Active
+                        </div>
+                    </div><!-- aside footer end-->
+                </div><!-- sidenav end-->
+            </aside><!-- page-aside end-->
+            <main class="content">
+                <header class="navbar page-header darkHeader bg-dark navbar-expand-lg">
+                    <ul class="nav flex-row mr-auto">
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="nav-link sidenav-btn h-lg-down">
+                                <span class="navbar-toggler-icon"></span>
+                            </a>
+                            <a class="nav-link sidenav-btn h-lg-up" href="#page-aside"  data-toggle="dropdown" data-target="#page-aside">
+                                <span class="navbar-toggler-icon"></span>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <ul class="nav flex-row order-lg-2 ml-auto nav-icons">
+
+                        <li class="nav-item dropdown user-dropdown align-items-center">
+                            <a class="nav-link" href="#" id="dropdown-user" role="button" data-toggle="dropdown">
+                                <span class="user-states states-online">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                                <span class="ml-2 h-lg-down dropdown-toggle">
+                                    Hi, <%= FirstName %>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
+                                <div class="text-center p-3 pt-0 b-b mb-5">
+                                    <span class="mb-0 d-block font300 text-title fs-1x"><span class="font700"><%=FirstName %> <%=LastName %></span></span>
+                                    <span class="fs12 mb-0 text-muted"><%=Role %></span>
+                                </div>
+                                <a class="dropdown-item" href="#"><i class="icon-User"></i>My Profile</a>
+                                <a class="dropdown-item" href="#"><i class="icon-Newspaper"></i> Tasks</a>
+                                <%--<a class="dropdown-item" href="#"><i class="icon-Speach-Bubble4 "></i> Messages <span class="badge badge-text text-primary-active bg-primary-light ml-2">5 New</span></a>--%>
+                                <a class="dropdown-item" href="#"><i class="icon-Speach-Bubble4 "></i> Messages</a>
+                                <div class="dropdown-divider"></div>
+                                <%--<a class="dropdown-item" href="#"><i class="icon-Gear"></i> Settings<span class="badge badge-text text-danger-active bg-danger-light ml-2">Update</span></a>--%>
+                                <a class="dropdown-item" href="#"><i class="icon-Gear"></i> Settings</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item logout" href="/welcome.aspx?state=false"><i class="icon-Power"></i> logout</a>
+
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </header>
+
+                <div class="page-content">
+                   <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+<%--                    <div class="container-fluid">
+                        <p class="mb-0">
+                             Put your content into <code> page-content </code> div for maintain layout standard and flexibility
+                        </p>
+                    </div>--%>
+                </div>
+                <footer class="content-footer bg-light b-t">
+                    <div class="d-flex flex align-items-center pl-15 pr-15">
+                        <div class="d-flex flex p-3 ml-auto">
+                            <div>
+                                <a href="#" class="d-inline-flex pl-0 pr-2 b-r">Contact</a>
+                                <a href="#" class="d-inline-flex pl-2 pr-2 b-r">Storage</a>
+                                <a href="#" class="d-inline-flex pl-2 pr-2 ">Privacy</a>
+                            </div>
+                        </div>
+                        <div class="d-flex flex p-3 mr-auto justify-content-end">
+                            <div class="text-muted">© Copyright 2023 SysView Solutions</div>
+                        </div>
+                    </div>
+                </footer>
+            </main><!-- page content end-->
+        </div><!-- app's main wrapper end -->
+    </body>
+
+</html>
